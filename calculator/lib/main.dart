@@ -8,7 +8,7 @@ class CalculatorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Simple Calculator',
+      title: 'Calculator',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -26,14 +26,14 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
   String output = "0";
   String _output = "0";
   String operand = "";
-  double num1 = 0.0;
-  double num2 = 0.0;
+  double num1 = 0;
+  double num2 = 0;
 
   buttonPressed(String buttonText) {
     if (buttonText == "C") {
       _output = "0";
-      num1 = 0.0;
-      num2 = 0.0;
+      num1 = 0;
+      num2 = 0;
       operand = "";
     } else if (buttonText == "+" ||
         buttonText == "-" ||
@@ -64,8 +64,8 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
         default:
           break;
       }
-      num1 = 0.0;
-      num2 = 0.0;
+      num1 = 0;
+      num2 = 0;
       operand = "";
     } else {
       _output = _output + buttonText;
@@ -76,15 +76,17 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
     });
   }
 
-  Widget buildButton(String buttonText) {
+  Widget buildButton(String buttonText, {Color? buttonColor, Color? textColor}) {
     return Expanded(
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.all(24.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: buttonColor ?? Color.fromARGB(255, 211, 211, 211),  // Default light gray button background
+          foregroundColor: textColor ?? Colors.blue,  // Default blue button text
+          padding: EdgeInsets.all(19.0),  // Reduced padding to make buttons smaller
         ),
         child: Text(
           buttonText,
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),  // Increased font size
         ),
         onPressed: () => buttonPressed(buttonText),
       ),
@@ -95,15 +97,16 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Simple Calculator'),
+        backgroundColor: Color.fromARGB(255, 20, 20, 20),  // Black header color
       ),
       body: Container(
+        color: Color.fromARGB(255, 20, 20, 20),  // Dark gray background color
         child: Column(
           children: <Widget>[
             Container(
               alignment: Alignment.centerRight,
               padding: EdgeInsets.symmetric(
-                vertical: 24.0,
+                vertical: 60.0,
                 horizontal: 12.0,
               ),
               child: Text(
@@ -111,57 +114,58 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                 style: TextStyle(
                   fontSize: 48.0,
                   fontWeight: FontWeight.bold,
+                  color: Colors.white,  // Displayed text color
                 ),
               ),
             ),
             Expanded(
-              child: Divider(),
+              child: Divider(color: Color.fromARGB(255, 1, 146, 131)),
             ),
             Column(
               children: [
                 Row(
                   children: [
-                    buildButton("7"),
-                    buildButton("8"),
-                    buildButton("9"),
-                    buildButton("/"),
+                    buildButton("7", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("8", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("9", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("/", buttonColor: Colors.white, textColor: Color.fromARGB(255, 1, 146, 131)),
                   ],
                 ),
                 Row(
                   children: [
-                    buildButton("4"),
-                    buildButton("5"),
-                    buildButton("6"),
-                    buildButton("*"),
+                    buildButton("4", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("5", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("6", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("*", buttonColor: Colors.white, textColor: Color.fromARGB(255, 1, 146, 131)),
                   ],
                 ),
                 Row(
                   children: [
-                    buildButton("1"),
-                    buildButton("2"),
-                    buildButton("3"),
-                    buildButton("-"),
+                    buildButton("1", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("2", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("3", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("-", buttonColor: Colors.white, textColor: Color.fromARGB(255, 1, 146, 131)),
                   ],
                 ),
                 Row(
                   children: [
-                    buildButton("."),
-                    buildButton("0"),
-                    buildButton("00"),
-                    buildButton("+"),
+                    buildButton(".", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("0", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("00", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Color.fromARGB(255, 1, 146, 131)),
+                    buildButton("+", buttonColor: Colors.white, textColor: Color.fromARGB(255, 1, 146, 131)),
                   ],
                 ),
                 Row(
                   children: [
-                    buildButton("C"),
-                    buildButton("="),
+                    buildButton("C", buttonColor: Color.fromARGB(255, 0, 0, 0), textColor: Colors.white),
+                    buildButton("=", buttonColor: Color.fromARGB(255, 1, 146, 131), textColor: Colors.white),  // Different color for "=" button
                   ],
                 ),
               ],
             )
           ],
         ),
-      ),
-    );
-  }
+     ),
+);
+}
 }
